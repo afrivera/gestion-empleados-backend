@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Empleado {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "nombre", length = 60, nullable = false)
@@ -23,6 +23,7 @@ public class Empleado {
     }
 
     public Empleado(Long id, String nombre, String apellido, String email) {
+        super();
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
