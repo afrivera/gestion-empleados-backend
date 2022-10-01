@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -47,5 +49,17 @@ public class EmpleadoController {
         Empleado empleadoActualizado = repo.save(empleado);
 
         return ResponseEntity.ok(empleadoActualizado);
+    }
+
+    // Metodo para eliminar un empleado
+    @DeleteMapping("/empleados/{id}")
+    public ResponseEntity<Map<String, Boolean>> eliminarEmpleado(@PathVariable Long id){
+        Empleado empleado = repo.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("No existe un empleado con el id: "+ id));
+
+        repo.delete(empleado);
+        Map<String, Boolean> respuesta = new HashMap<>();
+        respuesta.put("eliminar", Boolean.TRUE);
+        return ResponseEntity.ok(respuesta);
     }
 }
