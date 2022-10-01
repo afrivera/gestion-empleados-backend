@@ -3,10 +3,7 @@ package com.gestion.empleados.controller;
 import com.gestion.empleados.model.Empleado;
 import com.gestion.empleados.repository.EmpleadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +18,11 @@ public class EmpleadoController {
     @GetMapping("/empleados")
     public List<Empleado> listarTodosLosEmpleados(){
         return repo.findAll();
+    }
+
+    // este metodo sirve para guardar un empleado
+    @PostMapping("/empleados")
+    public Empleado guardarEmpleado(@RequestBody Empleado empleado){
+        return repo.save(empleado);
     }
 }
